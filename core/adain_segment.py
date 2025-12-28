@@ -3,7 +3,6 @@ import torch.nn.functional as F
 import numpy as np
 from typing import List
 
-
 def calc_mean_std(feat: torch.Tensor, 
                   eps: float = 1e-5) -> tuple[torch.Tensor, 
                                               torch.Tensor]:
