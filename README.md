@@ -4,6 +4,6 @@ This project implements region aware style transfer by combining Segment Anythin
 
 ## Features
 
-**Regional Style Transfer** - Use SAM to segment the image and apply different artistic styles to different parts of an image
-**Intensity Control** - Adjust the style strength using the *alpha* parameter
-**Training Pipeline** - Train your own decoder on custom datasets
+- **Regional Style Transfer** - Use SAM to segment the image and apply different artistic styles to different parts of an image
+- **Intensity Control** - Adjust the style strength using the *alpha* parameter
+* **Training Pipeline** - Train your own decoder on custom datasets
