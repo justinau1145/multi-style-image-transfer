@@ -29,4 +29,4 @@ Alternatively, you can download the pre-trained decoder weights under the decode
 
 ### Testing
 
-Download the SAM checkpoint [vit_h_4b8939.pth](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth). Run the script test.py.
+Download the SAM checkpoint [sam_vit_h_4b8939.pth](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth). Run the script test.py.
