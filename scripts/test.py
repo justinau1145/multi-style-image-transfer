@@ -2,7 +2,7 @@ import torch
 import torch.nn.functional as F
 import numpy as np
 from PIL import Image
-import argeparse
+import argparse
 
 # Project imports
 from models.encoder import VGGEncoder
