@@ -50,8 +50,6 @@ python scripts/train.py \
 
 Alternatively, you can download the pre-trained decoder weights trained using Google Colab under the [decoder_final.pth](https://github.com/justinau1145/segmented-style-transfer/releases/latest) file.
 
-```bash 
-
 ### Testing
 
 Download the SAM checkpoint [sam_vit_h_4b8939.pth](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth). Run the script test.py.
