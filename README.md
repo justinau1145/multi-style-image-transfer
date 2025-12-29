@@ -26,6 +26,7 @@ Clone the repository
 ```bash
 git clone https://github.com/justinau1145/segmented-style-transfer.git
 cd segmented-style-transfer
+pip install -r requirements.txt
 ```
 
 ### Training
