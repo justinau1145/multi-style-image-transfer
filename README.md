@@ -66,7 +66,6 @@ python scripts/inference.py \
     --sam_model vit_h \
     --device cuda \
     --visualize_masks \
-    --mask_indices 0 1
 ```
 
 ## References
