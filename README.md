@@ -33,7 +33,7 @@ cd segmented-style-transfer
 Download the data to the ./data/ folder. The content images come from the [COCO](https://cocodataset.org/#download) dataset and the style images come [Wikiart](https://www.kaggle.com/c/painter-by-numbers) dataset. Run the script train.py. 
 
 ```bash
-python scripts/train.py \
+python -m scripts.train.py \
     --content_dir ./data/content \
     --style_dir ./data/style \
     --save_dir ./checkpoints \
@@ -55,7 +55,7 @@ Alternatively, you can download the pre-trained decoder weights trained using Go
 Download the SAM checkpoint [sam_vit_h_4b8939.pth](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth). Run the script test.py.
 
 ```bash
-python scripts/test.py \
+python -m scripts.test.py \
     --content ./data/content/photo.jpg \
     --styles ./data/style/style1.jpg ./data/style/style2.jpg \
     --decoder ./decoder_final.pth \
