@@ -16,8 +16,8 @@ This project implements region aware style transfer by combining Segment Anythin
 - torchvision
 - numpy
 - Pillow
+- opencv
 - segment-anything
-- open-cv
 
 ## Usage
 
