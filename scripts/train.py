@@ -11,6 +11,7 @@ from models.decoder import Decoder
 from core.losses import total_loss
 from utils.utils import ImageDataset, get_train_transform, save_image
 
+
 def parse_args():
     parser = argparse.ArgumentParser(description='Train AdaIN style transfer decoder')
     
@@ -63,9 +64,11 @@ def main():
     style_dataset = ImageDataset(args.style_dir, transform=style_transform)
 
     content_loader = DataLoader(content_dataset, batch_size=args.batch_size, 
-                                shuffle=True, num_workers=args.num_workers)
+                                shuffle=True, num_workers=args.num_workers, 
+                                drop_last=True)
     style_loader = DataLoader(style_dataset, batch_size=args.batch_size, 
-                             shuffle=True, num_workers=args.num_workers)
+                             shuffle=True, num_workers=args.num_workers, 
+                             drop_last=True)
 
     # Create output directory
     os.makedirs(args.save_dir, exist_ok=True)
