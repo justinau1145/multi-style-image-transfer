@@ -10,4 +10,23 @@ This project implements region aware style transfer by combining Segment Anythin
 
 ## Results
 
-## Setup
+## Requirements
+
+- torch
+- torchvision
+- numpy
+- Pillow
+- segment-anything
+- open-cv
+
+## Usage
+
+### Training
+
+Download the data to the ./data/ folder. The content images come from the COCO dataset and the style images come Wikiart dataset. Run the script train.py. 
+
+Alternatively, you can download the pre-trained decoder weights under the decoder_final_pth file. 
+
+### Testing
+
+Download the SAM checkpoint [vit_h_4b8939.pth](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth). Run the script test.py.
