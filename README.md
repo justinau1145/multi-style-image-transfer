@@ -55,7 +55,7 @@ Alternatively, you can download the pre-trained decoder weights trained using Go
 Download the SAM checkpoint [sam_vit_h_4b8939.pth](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth). Run the script test.py.
 
 ```bash
-python scripts/inference.py \
+python scripts/test.py \
     --content ./data/content/photo.jpg \
     --styles ./data/style/style1.jpg ./data/style/style2.jpg \
     --decoder ./decoder_final.pth \
