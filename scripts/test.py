@@ -4,11 +4,11 @@ import numpy as np
 from PIL import Image
 
 # Project imports
-from encoder import VGGEncoder
-from decoder import Decoder
-from adain_segment import multi_adain, multi_adain_alpha
-from sam_segmentation import SAMSegmenter, load_image_for_sam
-from utils import load_image, save_image
+from modelsencoder import VGGEncoder
+from models.decoder import Decoder
+from models.adain_segment import multi_adain, multi_adain_alpha
+from models.sam_segmentation import SAMSegmenter, load_image_for_sam
+from utils.utils import load_image, save_image
 
 # Configuration
 content_path = './data/content/000000000013.jpg'
