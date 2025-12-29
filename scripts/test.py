@@ -6,7 +6,7 @@ from PIL import Image
 # Project imports
 from models.encoder import VGGEncoder
 from models.decoder import Decoder
-from models.adain_segment import multi_adain, multi_adain_alpha
+from core.adain_segment import multi_adain, multi_adain_alpha
 from models.sam_segmentation import SAMSegmenter, load_image_for_sam
 from utils.utils import load_image, save_image
 
