@@ -24,7 +24,7 @@ This project implements region aware style transfer by combining Segment Anythin
 Clone the repository
 
 ```bash
-git clone https://github.com/justinau1145/segmented-style-transfer
+git clone https://github.com/justinau1145/segmented-style-transfer.git
 cd your-repo-name
 ```
 
