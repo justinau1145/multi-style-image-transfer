@@ -1,0 +1,11 @@
+# Torch
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Numerical and Image Processing
+numpy>=1.21.0
+Pillow>=9.0.0
+opencv-python>=4.6.0
+
+# SAM
+git+https://github.com/facebookresearch/segment-anything.git
