@@ -25,7 +25,7 @@ Clone the repository
 
 ```bash
 git clone https://github.com/justinau1145/segmented-style-transfer.git
-cd your-repo-name
+cd segmented-style-transfer
 ```
 
 ### Training
