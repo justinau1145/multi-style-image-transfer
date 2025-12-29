@@ -65,7 +65,7 @@ python scripts/inference.py \
     --size 512 \
     --sam_model vit_h \
     --device cuda \
-    --visualize_masks \
+    --visualize_masks
 ```
 
 ## References
