@@ -38,10 +38,10 @@ python scripts/train.py \
     --style_dir ./data/style \
     --save_dir ./checkpoints \
     --epochs 10 \
-    --batch_size 8 \
+    --batch_size 32 \
     --lr 1e-4 \
     --image_size 512 \
-    --num_workers 4 \
+    --num_workers 0 \
     --content_weight 1.0 \
     --style_weight 10.0 \
     --checkpoint_interval 2 \
