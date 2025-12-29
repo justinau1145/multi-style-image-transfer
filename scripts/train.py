@@ -5,10 +5,10 @@ from torch.utils.data import DataLoader
 import os
 
 # Project imports
-from encoder import VGGEncoder
-from decoder import Decoder
-from losses import total_loss
-from utils import ImageDataset, get_train_transform, save_image
+from models.encoder import VGGEncoder
+from models.decoder import Decoder
+from core.losses import total_loss
+from utils.utils import ImageDataset, get_train_transform, save_image
 
 # Configurations
 content_dir = './data/content'
