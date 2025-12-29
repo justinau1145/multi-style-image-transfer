@@ -30,3 +30,14 @@ Alternatively, you can download the pre-trained decoder weights under the decode
 ### Testing
 
 Download the SAM checkpoint [sam_vit_h_4b8939.pth](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth). Run the script test.py.
+
+## References
+
+- [Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization](https://arxiv.org/abs/1703.06868)
+- [Segment Anything](https://arxiv.org/abs/2304.02643)
+
+## Acknowledgments
+
+- AdaIN implementation based on [Xun Huang and Serge Belongie's paper](https://arxiv.org/abs/1703.06868)
+- Segmentation powered by [Meta's SAM](https://github.com/facebookresearch/segment-anything)
+- VGG-19 encoder from PyTorch's pretrained models
