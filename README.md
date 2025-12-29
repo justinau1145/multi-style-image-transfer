@@ -32,11 +32,42 @@ cd your-repo-name
 
 Download the data to the ./data/ folder. The content images come from the [COCO](https://cocodataset.org/#download) dataset and the style images come [Wikiart](https://www.kaggle.com/c/painter-by-numbers) dataset. Run the script train.py. 
 
+```bash
+python scripts/train.py \
+    --content_dir ./data/content \
+    --style_dir ./data/style \
+    --save_dir ./checkpoints \
+    --epochs 10 \
+    --batch_size 8 \
+    --lr 1e-4 \
+    --image_size 512 \
+    --num_workers 4 \
+    --content_weight 1.0 \
+    --style_weight 10.0 \
+    --checkpoint_interval 2 \
+    --device cuda
+```
+
 Alternatively, you can download the pre-trained decoder weights under the decoder_final_pth file. 
 
 ### Testing
 
 Download the SAM checkpoint [sam_vit_h_4b8939.pth](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth). Run the script test.py.
+
+```bash
+python scripts/inference.py \
+    --content ./data/content/photo.jpg \
+    --styles ./data/style/style1.jpg ./data/style/style2.jpg \
+    --decoder ./decoder_final.pth \
+    --sam_checkpoint ./sam_vit_h_4b8939.pth \
+    --output ./output/result.jpg \
+    --alpha 1.0 \
+    --size 512 \
+    --sam_model vit_h \
+    --device cuda \
+    --visualize_masks \
+    --mask_indices 0 1
+```
 
 ## References
 
