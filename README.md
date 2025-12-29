@@ -23,7 +23,7 @@ This project implements region aware style transfer by combining Segment Anythin
 
 ### Training
 
-Download the data to the ./data/ folder. The content images come from the COCO dataset and the style images come Wikiart dataset. Run the script train.py. 
+Download the data to the ./data/ folder. The content images come from the [COCO](https://cocodataset.org/#download) dataset and the style images come [Wikiart](https://www.kaggle.com/c/painter-by-numbers) dataset. Run the script train.py. 
 
 Alternatively, you can download the pre-trained decoder weights under the decoder_final_pth file. 
 
