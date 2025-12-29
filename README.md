@@ -21,6 +21,13 @@ This project implements region aware style transfer by combining Segment Anythin
 
 ## Usage
 
+First, clone the repository
+
+```bash
+git clone [https://github.com/justinau1145/segmented-style-transfer](https://github.com/justinau1145/ysegmented-style-transfer.git)
+cd your-repo-name
+```
+
 ### Training
 
 Download the data to the ./data/ folder. The content images come from the [COCO](https://cocodataset.org/#download) dataset and the style images come [Wikiart](https://www.kaggle.com/c/painter-by-numbers) dataset. Run the script train.py. 
