@@ -53,7 +53,7 @@ python -m scripts.train \
     --device cuda
 ```
 
-Alternatively, you can download the pre-trained decoder weights trained using Google Colab under the [decoder_final.pth](https://github.com/justinau1145/segmented-style-transfer/releases/latest) file.
+Alternatively, you can download the pre-trained decoder weights trained using Google Colab under the [decoder_trained.pth](https://github.com/justinau1145/segmented-style-transfer/releases/latest) file.
 
 ### Testing
 
