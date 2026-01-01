@@ -67,7 +67,7 @@ python -m scripts.test \
     --sam_checkpoint ./sam_vit_h_4b8939.pth
     --alphas 1.0 0.5 \
     --output_name ./output/result.jpg \
-    --device cuda \
+    --device cuda
 ```
 
 ## References
