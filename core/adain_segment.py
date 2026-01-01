@@ -20,13 +20,10 @@ def calc_mean_std(feat: torch.Tensor,
             - mean: Spatial mean
             - std: Spatial standard deviation
     """
-    size = feat.size()
-    assert len(size) == 4, "Input must be 4D tensor"
-    
-    N, C = size[:2]
-    feat_var = feat.view(N, C, -1).var(dim=2) + eps
-    feat_std = feat_var.sqrt().view(N, C, 1, 1)
-    feat_mean = feat.view(N, C, -1).mean(dim=2).view(N, C, 1, 1)
+    batch_size, c = feat.size()[:2]
+    feat_mean = feat.reshape(batch_size, c, -1).mean(dim=2).reshape(batch_size, c, 1, 1)
+    feat_std = feat.reshape(batch_size, c, -1).std(dim=2).reshape(batch_size, c, 1, 1) + eps
+    return feat_mean, feat_std
     
     return feat_mean, feat_std
 
