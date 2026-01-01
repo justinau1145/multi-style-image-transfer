@@ -1,6 +1,6 @@
-# Segmented Style Transfer
+# Multi Style Transfer
 
-This project implements region aware style transfer by combining Segment Anything Model (SAM) with Adaptive Instance Normalization (AdaIN) based on the paper [Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization](https://arxiv.org/abs/1703.06868). While standard image style transfer applies 1 artistic style to the entire image, this allows you to apply different artistic styles to different regions if the image. 
+This project implements region aware style transfer by combining Segment Anything Model (SAM) with Adaptive Instance Normalization (AdaIN) based on the paper [Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization](https://arxiv.org/abs/1703.06868). While standard image style transfer applies 1 artistic style to the entire image, this allows you to apply different artistic styles to different regions of the image. 
 
 ## Features
 
@@ -28,7 +28,7 @@ This project implements region aware style transfer by combining Segment Anythin
 Clone the repository
 
 ```bash
-git clone https://github.com/justinau1145/segmented-style-transfer.git
+git clone https://github.com/justinau1145/multi-style-transfer.git
 cd segmented-style-transfer
 pip install -r requirements.txt
 ```
