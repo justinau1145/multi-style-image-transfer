@@ -4,7 +4,6 @@ from segment_anything import sam_model_registry, SamAutomaticMaskGenerator
 from PIL import Image
 import cv2
 
-
 class SAMSegmenter:
     """
     Wrapper for Segment Anything Model (SAM) 
