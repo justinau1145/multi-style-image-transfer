@@ -1,96 +1,63 @@
 import torch
 import torch.nn.functional as F
-import numpy as np
-from typing import List
 
 def calc_mean_std(feat: torch.Tensor, 
-                  eps: float = 1e-5) -> tuple[torch.Tensor, 
-                                              torch.Tensor]:
+                  eps: float = 1e-6) -> tuple[torch.Tensor, torch.Tensor]:
     """Compute channel-wise mean and standard deviation of feature maps.
-
+    
     Statistics are computed independently for each channel across the
     spatial dimensions (H, W), and reshaped for broadcasting.
 
     Args:
-        features: Feature tensor
-        eps: Small constant to avoid division by zero. Defaults to 1e-5.
+        feat: Feature tensor of shape [batch_size, c, h, w]
+        eps: Small constant to avoid division by zero. Defaults to 1e-6.
 
     Returns:
         Tuple containing:
-            - mean: Spatial mean
-            - std: Spatial standard deviation
+            - mean: Spatial mean of shape [batch_size, c, 1, 1]
+            - std: Spatial standard deviation of shape [batch_size, c, 1, 1]
     """
     batch_size, c = feat.size()[:2]
     feat_mean = feat.reshape(batch_size, c, -1).mean(dim=2).reshape(batch_size, c, 1, 1)
     feat_std = feat.reshape(batch_size, c, -1).std(dim=2).reshape(batch_size, c, 1, 1) + eps
     return feat_mean, feat_std
-    
-    return feat_mean, feat_std
 
-def multi_adain(content_feat: torch.Tensor, 
-                style_feats: List[torch.Tensor], masks: List[torch.Tensor],
-                device: torch.device) -> torch.Tensor:
-    """
-    Apply different AdaIN transformations to different regions.
-    
-    This function segments the content features into different regions
-    using masks and applies different style statistics to each region.
-    
+
+def adaptive_instance_normalization(content_feat: torch.Tensor, 
+                                   style_feat: torch.Tensor) -> torch.Tensor:
+    """Apply Adaptive Instance Normalization (AdaIN).
+
+    AdaIN aligns the channel-wise mean and standard deviation of the
+    content features with those of the style features, enabling
+    style transfer while preserving content structure.
+
     Args:
-        content_feat: Content feature map.
-        style_feats: List of style feature maps.
-        masks: List of binary masks for each region
-        device: Device for computation.
+        content_feat: Content feature map of shape [batch_size, c, h, w]
+        style_feat: Style feature map of shape [batch_size, c, h, w]
 
     Returns:
-        torch.Tensor: Multi-style normalized features.
+        torch.Tensor: The stylized feature maps of shape [batch_size, c, h, w]
     """
-    size = content_feat.size()
-    _, C, H, W = size
-    
     content_mean, content_std = calc_mean_std(content_feat)
+    style_mean, style_std = calc_mean_std(style_feat)
     
-    # Normalize content features
-    normalized_feat = (content_feat - content_mean.expand(size)) / content_std.expand(size)
-    output = torch.zeros_like(content_feat).to(device)
-    
-    # Process each style-region pair
-    for style_feat, mask in zip(style_feats, masks):
-        style_mean, style_std = calc_mean_std(style_feat)
-        stylized = normalized_feat * style_std.expand(size) + style_mean.expand(size)
-        output = output + stylized * mask
-    
-    # Create total mask to find uncovered regions
-    total_mask = torch.zeros((size[0], 1, H, W), device=device)
-    for mask in masks:
-        total_mask = torch.clamp(total_mask + mask, 0, 1)
-    
-    output = output + content_feat * (1 - total_mask)
-    
-    return output
+    normalized_features = style_std * (content_feat - content_mean) / content_std + style_mean
+    return normalized_features
 
-
-def multi_adain_alpha(content_feat: torch.Tensor, 
-                      style_feats: List[torch.Tensor], 
-                      masks: List[torch.Tensor], alpha: float,
-                      device: torch.device) -> torch.Tensor:
+def regional_adain(content_feat: torch.Tensor, 
+                   style_feat: torch.Tensor, 
+                   mask: torch.Tensor, 
+                   alpha: float = 1.0) -> torch.Tensor:
     """
-    Apply multi-style AdaIN with intensity control.
+    Applies AdaIN to a specific region with intensity control.
     
     Args:
         content_feat: Content feature map.
-        style_feats: List of style feature maps.
-        masks: List of region masks.
-        alpha: Style transfer intensity (0-1).
-        device: Computation device.
-    
-    Returns:
-        torch.Tensor: Blended features with controlled style intensity
+        style_feat: Style feature map.
+        mask: Binary mask [1, 1, H, W].
+        alpha: Style weight (0.0 = pure content, 1.0 = full style).
     """
-    stylized_feat = multi_adain(content_feat, style_feats, masks, device)
-
-    return alpha * stylized_feat + (1 - alpha) * content_feat
-
-
-# Alias for convenience
-multi_adain = multi_adain
+    stylized_feat = adaptive_instance_normalization(content_feat, style_feat)
+    controlled_feat = alpha * stylized_feat + (1.0 - alpha) * content_feat    
+    mask_resized = F.interpolate(mask, size=content_feat.shape[2:], mode='nearest')
+    return controlled_feat * mask_resized
