@@ -1,5 +1,6 @@
 import torch
 from torchvision import transforms
+from torchvision.utils import save_image as tv_save_image
 from torch.utils.data import Dataset
 from PIL import Image
 import os
@@ -8,40 +9,65 @@ import os
 MEAN = [0.485, 0.456, 0.406]
 STD = [0.229, 0.224, 0.225]
 
-def get_transform(size: int = 256, crop: bool = False) -> transforms.Compose:
-    """Creates the standard preprocessing pipeline for VGG networks.
 
-    Constructs a transformation pipeline that resizes, crops, and 
-    normalizes images to match the statistics expected by 
-    ImageNet-pretrained models.
+def load_image(image_path: str) -> torch.Tensor:
+    """Load an image and apply normalization (no resizing).
+    
+    This matches the reference test.py implementation which processes
+    images at their original size during inference.
 
     Args:
-        size: The spatial resolution for the output tensor.
+        image_path: Path to the image file.
 
     Returns:
-        transforms.Compose: A composition of torchvision transforms.
+        torch.Tensor: Normalized image tensor of shape [1, 3, H, W]
     """
-    transform_list = []
+    image = Image.open(image_path).convert('RGB')
     
-    if crop:
-        transform_list.append(transforms.CenterCrop(size))
-    else:
-        transform_list.append(transforms.Resize(size))
-    
-    transform_list.extend([
+    transform = transforms.Compose([
         transforms.ToTensor(),
         transforms.Normalize(mean=MEAN, std=STD)
     ])
     
-    return transforms.Compose(transform_list)
+    return transform(image).unsqueeze(0)
+
+
+def denormalize(tensor: torch.Tensor, device) -> torch.Tensor:
+    """Reverses ImageNet normalization for visualization.
+    
+    Args:
+        tensor: Normalized image tensor
+        device: Device where tensor is located
+
+    Returns:
+        torch.Tensor: Denormalized tensor clamped to [0, 1]
+    """
+    std = torch.Tensor(STD).reshape(-1, 1, 1).to(device)
+    mean = torch.Tensor(MEAN).reshape(-1, 1, 1).to(device)
+    res = torch.clamp(tensor * std + mean, 0, 1)
+    return res
+
+
+def save_image(tensor: torch.Tensor, path: str) -> None:
+    """Saves a tensor as an image file.
+
+    Args:
+        tensor: Image tensor to save
+        path: Output file path
+    """
+    # Create directory if needed
+    os.makedirs(os.path.dirname(path) if os.path.dirname(path) else '.', 
+                exist_ok=True)
+    
+    # Use torchvision's save_image
+    tv_save_image(tensor, path, nrow=1)
 
 
 def get_train_transform(size: int = 512) -> transforms.Compose:
-    """
-    Get training transformation with random croppings
+    """Get training transformation with random cropping.
 
     Args:
-        size: The spatial resolution for the output tensor.
+        size: The spatial resolution to resize to before cropping.
 
     Returns:
         transforms.Compose: A composition of torchvision transforms.
@@ -54,83 +80,12 @@ def get_train_transform(size: int = 512) -> transforms.Compose:
     ])
 
 
-def load_image(image_path: str, size: int = 256, 
-               crop: bool = False) -> torch.Tensor:
-    """
-    Load an image from disk and apply preprocessing.
-
-    The image is loaded using PIL, converted to RGB format,
-    and processed using the provided transform.
-
-    Args:
-        path: Path to the image file.
-        transform: Preprocessing transform to apply.
-
-    Returns:
-        torch.Tensor: Preprocessed image tensor.
-    """
-    image = Image.open(image_path).convert('RGB')
-    transform = get_transform(size, crop)
-    return transform(image).unsqueeze(0)
-
-
-def denormalize(tensor: torch.Tensor) -> torch.Tensor:
-    """Reverses ImageNet normalization for visualization.
-    
-    Args:
-        tensor: Normalized image tensor
-
-    Returns:
-        torch.Tensor: Denormalized tensor.
-    """
-    mean = torch.tensor(MEAN).view(3, 1, 1)
-    std = torch.tensor(STD).view(3, 1, 1)
-    
-    if tensor.is_cuda:
-        mean = mean.cuda()
-        std = std.cuda()
-    
-    return tensor * std + mean
-
-
-def save_image(tensor: torch.Tensor, path: str) -> None:
-    """Saves a tensor as an image file.
-
-    Handles denormalization, clamping to valid pixel ranges, 
-    and CPU transfer.
-
-    Args:
-        tensor: Image tensor, assumed to be normalized.
-        path: Output file path.
-    """
-    if tensor.dim() == 4:
-        tensor = tensor.squeeze(0)
-    
-    # Denormalize
-    tensor = denormalize(tensor)
-    
-    # Clamp to [0, 1]
-    tensor = torch.clamp(tensor, 0, 1)
-    
-    # Convert to PIL Image
-    transform = transforms.ToPILImage()
-    image = transform(tensor.cpu())
-    
-    # Create directory if needed
-    os.makedirs(os.path.dirname(path) if os.path.dirname(path) else '.', 
-                exist_ok=True)
-
-    image.save(path)
-
-
 class ImageDataset(Dataset):
-    """
-    Dataset for loading images from a directory tree.
+    """Dataset for loading images from a directory tree.
 
     Images are recursively discovered under the given root directory,
     filtered by common image extensions, and preprocessed using the
-    provided transform. This dataset is used for both content and style 
-    images.
+    provided transform.
     """
     def __init__(self, root_dir: str, transform) -> None:
         """
@@ -154,8 +109,7 @@ class ImageDataset(Dataset):
         return len(self.image_paths)
     
     def __getitem__(self, idx: int) -> torch.Tensor:
-        """
-        Load and preprocess a single image.
+        """Load and preprocess a single image.
 
         Args:
             idx: Index of the image.
