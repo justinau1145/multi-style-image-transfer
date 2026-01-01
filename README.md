@@ -10,6 +10,10 @@ This project implements region aware style transfer by combining Segment Anythin
 
 ## Results
 
+### Single Style Transfer
+
+### Multi-Style Transfer
+
 ## Requirements
 
 - torch
