@@ -4,6 +4,7 @@ from segment_anything import sam_model_registry, SamAutomaticMaskGenerator
 from PIL import Image
 import cv2
 
+
 class SAMSegmenter:
     """
     Wrapper for Segment Anything Model (SAM) 
@@ -89,30 +90,22 @@ class SAMSegmenter:
         
         return overlay
     
-    def create_mask_tensor(self, mask: dict, 
-                          target_size: tuple[int, int]) -> torch.Tensor:
+    def create_mask_tensor(self, mask: dict) -> torch.Tensor:
         """
-        Convert SAM mask to PyTorch tensor with specified size.
+        Convert SAM mask to PyTorch tensor.
         
         Args:
             mask: Mask dictionary from SAM.
-            target_size: Target.
         
         Returns:
-            torch.Tensor: Binary mask tensor.
+            torch.Tensor: Binary mask tensor of shape [1, 1, H, W].
         """
         segmentation = mask['segmentation'].astype(np.float32)
-        
-        # Resize if needed
-        if segmentation.shape != target_size:
-            segmentation = cv2.resize(segmentation, 
-                                      (target_size[1], target_size[0]),
-                                      interpolation=cv2.INTER_LINEAR)
         
         mask_tensor = torch.from_numpy(segmentation).unsqueeze(0).unsqueeze(0)
         
         return mask_tensor
-                              
+    
     def get_complement_mask(self, masks: list[dict], 
                             image_shape: tuple) -> dict:
         """
