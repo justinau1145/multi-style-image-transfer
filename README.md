@@ -58,15 +58,12 @@ Download the SAM checkpoint [sam_vit_h_4b8939.pth](https://dl.fbaipublicfiles.co
 ```bash
 python -m scripts.test \
     --content ./data/content/photo.jpg \
-    --styles ./data/style/style1.jpg ./data/style/style2.jpg \
-    --decoder ./decoder_final.pth \
-    --sam_checkpoint ./sam_vit_h_4b8939.pth \
-    --output ./output/result.jpg \
-    --alpha 1.0 \
-    --size 512 \
-    --sam_model vit_h \
+    --style_paths ./data/style/style1.jpg ./data/style/style2.jpg \
+    --decoder_path ./decoder_final.pth \
+    --sam_checkpoint ./sam_vit_h_4b8939.pth
+    --alphas 1.0 0.5 \
+    --output_name ./output/result.jpg \
     --device cuda \
-    --visualize_masks
 ```
 
 ## References
