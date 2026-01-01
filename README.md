@@ -1,4 +1,4 @@
-# Multi Style Transfer
+# Multi-Style Image Transfer
 
 This project implements region aware style transfer by combining Segment Anything Model (SAM) with Adaptive Instance Normalization (AdaIN) based on the paper [Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization](https://arxiv.org/abs/1703.06868). While standard image style transfer applies 1 artistic style to the entire image, this allows you to apply different artistic styles to different regions of the image. 
 
@@ -28,7 +28,7 @@ This project implements region aware style transfer by combining Segment Anythin
 Clone the repository
 
 ```bash
-git clone https://github.com/justinau1145/multi-style-transfer.git
+git clone https://github.com/justinau1145/multi-style-image-transfer.git
 cd segmented-style-transfer
 pip install -r requirements.txt
 ```
@@ -53,7 +53,7 @@ python -m scripts.train \
     --device cuda
 ```
 
-Alternatively, you can download the pre-trained decoder weights trained using Google Colab under the [decoder_trained.pth](https://github.com/justinau1145/segmented-style-transfer/releases/latest) file.
+Alternatively, you can download the pre-trained decoder weights trained using Google Colab under the [decoder_trained.pth](https://github.com/justinau1145/multi-style-image-transfer/releases/latest) file.
 
 ### Testing
 
