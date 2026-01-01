@@ -1,6 +1,6 @@
 import torch
 import torch.nn.functional as F
-from adain import calc_mean_std
+from adain_segment import calc_mean_std
 import torch.nn as nn
 
 def content_loss(output_features: torch.Tensor, 
