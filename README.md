@@ -57,7 +57,7 @@ Download the SAM checkpoint [sam_vit_h_4b8939.pth](https://dl.fbaipublicfiles.co
 
 ```bash
 python -m scripts.test \
-    --content ./data/content/photo.jpg \
+    --content_path ./data/content/photo.jpg \
     --style_paths ./data/style/style1.jpg ./data/style/style2.jpg \
     --decoder_path ./decoder_final.pth \
     --sam_checkpoint ./sam_vit_h_4b8939.pth
