@@ -18,7 +18,7 @@ def parse_args():
                         help='Path to the content image')
     parser.add_argument('--style_paths', type=str, nargs='+', required=True,
                         help='List of paths to style images (e.g., style1.jpg style2.jpg)')
-    parser.add_argument('--decoder_path', type=str, default='./decoder_epoch_1.pth',
+    parser.add_argument('--decoder_path', type=str, default='./decoder_weights.pth',
                         help='Path to the trained AdaIN decoder checkpoint')
     parser.add_argument('--sam_checkpoint', type=str, default='sam_vit_h_4b8939.pth',
                         help='Path to SAM checkpoint file')
