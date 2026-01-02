@@ -1,6 +1,6 @@
 # Multi-Style Image Transfer
 
-This project implements multi-style image transfer by combining Segment Anything Model (SAM) with Adaptive Instance Normalization (AdaIN) based on the paper [Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization](https://arxiv.org/abs/1703.06868). While standard image style transfer applies 1 artistic style to the entire image, this allows you to apply different artistic styles to different parts of the image. 
+This project implements multi-style image transfer by enhancing Adaptive Instance Normalization (AdaIN), based on the paper [Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization](https://arxiv.org/abs/1703.06868), with Segment Anything Model (SAM). While standard image style transfer applies only 1 artistic style to the entire image, this model can apply different artistic styles to different parts of the image. 
 
 ## Features
 
