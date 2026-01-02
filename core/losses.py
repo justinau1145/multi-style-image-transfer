@@ -1,6 +1,6 @@
 import torch
 import torch.nn.functional as F
-from core.adain_segment import calc_mean_std
+from core.adain_segment import calc_mean_std, adaptive_instance_normalization
 import torch.nn as nn
 
 def content_loss(output_features: torch.Tensor, 
@@ -62,9 +62,7 @@ def total_loss(
             - total_loss: The scalar tensor to backpropagate.
             - loss_dict: A dictionary of float values for 
                 logging/monitoring.
-    """
-    from adain import adaptive_instance_normalization
-    
+    """    
     # Encode content and style
     content_feat = encoder(content_img)
     style_feat = encoder(style_img)
