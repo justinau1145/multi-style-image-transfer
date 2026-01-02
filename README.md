@@ -41,7 +41,7 @@ Clone the repository
 
 ```bash
 git clone https://github.com/justinau1145/multi-style-image-transfer.git
-cd segmented-style-transfer
+cd multi-style-image-transfer
 pip install -r requirements.txt
 ```
 
