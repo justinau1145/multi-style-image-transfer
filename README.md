@@ -16,13 +16,13 @@ This project implements region aware style transfer by combining Segment Anythin
 
 ![](results/seattle_single_style_result2.jpg)
 
+### Multi-Style Transfer
+
 ![](results/seattle_result.jpg)
 
 ![](results/bus_result.jpg)
 
 ![](results/hong_kong_result.jpg)
-
-### Multi-Style Transfer
 
 ## Requirements
 
