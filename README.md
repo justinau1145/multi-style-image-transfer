@@ -76,7 +76,7 @@ python -m scripts.test \
     --content_path ./data/content/photo.jpg \
     --style_paths ./data/style/style1.jpg ./data/style/style2.jpg \
     --decoder_path ./decoder_weights.pth \
-    --sam_checkpoint ./sam_vit_h_4b8939.pth
+    --sam_checkpoint ./sam_vit_h_4b8939.pth \
     --alphas 1.0 0.5 \
     --output_name ./output/result.jpg \
     --device cuda
