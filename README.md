@@ -53,7 +53,7 @@ python -m scripts.train \
     --device cuda
 ```
 
-Alternatively, you can download the pre-trained decoder weights trained using Google Colab under the [decoder_trained.pth](https://github.com/justinau1145/multi-style-image-transfer/releases/latest) file.
+Alternatively, you can download the pre-trained decoder weights trained using Google Colab under the [decoder_weights.pth](models/decoder_weights.pth) file.
 
 ### Testing
 
@@ -63,7 +63,7 @@ Download the SAM checkpoint [sam_vit_h_4b8939.pth](https://dl.fbaipublicfiles.co
 python -m scripts.test \
     --content_path ./data/content/photo.jpg \
     --style_paths ./data/style/style1.jpg ./data/style/style2.jpg \
-    --decoder_path ./decoder_final.pth \
+    --decoder_path ./decoder_weights.pth \
     --sam_checkpoint ./sam_vit_h_4b8939.pth
     --alphas 1.0 0.5 \
     --output_name ./output/result.jpg \
