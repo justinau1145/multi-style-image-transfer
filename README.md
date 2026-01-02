@@ -12,7 +12,15 @@ This project implements region aware style transfer by combining Segment Anythin
 
 ### Single Style Transfer
 
-![coolio](results/seattle_single_style_result1.jpg)
+![](results/seattle_single_style_result1.jpg)
+
+![](results/seattle_single_style_result2.jpg)
+
+![](results/seattle_result.jpg)
+
+![](results/bus_result.jpg)
+
+![](results/hong_kong_result.jpg)
 
 ### Multi-Style Transfer
 
