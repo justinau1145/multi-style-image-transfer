@@ -4,6 +4,7 @@ from segment_anything import sam_model_registry, SamAutomaticMaskGenerator
 from PIL import Image
 import cv2
 
+
 class SAMSegmenter:
     """
     Wrapper for Segment Anything Model (SAM) 
@@ -58,13 +59,28 @@ class SAMSegmenter:
                 - 'predicted_iou': Quality score.
         """
         masks = self.mask_generator.generate(image)
-        
         masks = sorted(masks, key=lambda x: x['area'], reverse=True)
         
         if num_masks is not None:
             masks = masks[:num_masks]
+
+        processed_masks = []
+        claimed_pixels = np.zeros(image.shape[:2], dtype=bool)
+
+        for mask in masks:
+            current_seg = mask['segmentation']
+            
+            non_overlapping_seg = current_seg & ~claimed_pixels
+            
+            mask['segmentation'] = non_overlapping_seg
+            mask['area'] = np.sum(non_overlapping_seg)
+            
+            claimed_pixels |= non_overlapping_seg
+            
+            if mask['area'] > 0:
+                processed_masks.append(mask)
         
-        return masks
+        return processed_masks
     
     def visualize_masks(self, image: np.ndarray, 
                        masks: list[dict], alpha: float = 0.5) -> np.ndarray:
