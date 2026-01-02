@@ -20,8 +20,6 @@ This project implements multi-style image transfer by combining Segment Anything
 
 ![](results/seattle_result.jpg)
 
-![](results/yosemite_result.jpg)
-
 ![](results/bus_result.jpg)
 
 ![](results/hong_kong_result.jpg)
