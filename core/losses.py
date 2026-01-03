@@ -2,7 +2,6 @@ import torch
 import torch.nn.functional as F
 from core.adain_segment import calc_mean_std, adaptive_instance_normalization
 import torch.nn as nn
-# testing
 
 def content_loss(output_features: torch.Tensor, 
                  target_features: torch.Tensor) -> torch.Tensor:
