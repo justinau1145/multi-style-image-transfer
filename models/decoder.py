@@ -1,6 +1,5 @@
 import torch
 import torch.nn as nn
-# test pull
 
 class Decoder(nn.Module):
     """Reconstructs an image from VGG-19 features.
