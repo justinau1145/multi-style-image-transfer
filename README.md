@@ -65,7 +65,7 @@ python -m scripts.train \
     --device cuda
 ```
 
-Alternatively, you can download the pre-trained decoder weights trained using Google Colab under the [decoder_weights.pth](models/decoder_weights.pth) file.
+Alternatively, you can download the pre-trained decoder weights trained [decoder_weights.pth](models/decoder_weights.pth) file in the models folder.
 
 ### Testing
 
