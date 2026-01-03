@@ -3,6 +3,8 @@ import numpy as np
 import argparse
 import os
 
+# merge test
+
 # Project imports
 from models.encoder import VGGEncoder
 from models.decoder import Decoder
