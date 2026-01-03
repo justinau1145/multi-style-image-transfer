@@ -81,9 +81,8 @@ def main():
 
     output = denormalize(output, device)
     
-    output_path = f'{args.output_name}.jpg'
-    save_image(output, output_path)
-    print(f"Success! Output saved to: {output_path}")
+    save_image(output, args.output_name)
+    print(f"Output saved to: {args.output_name}")
 
 if __name__ == '__main__':
     main()
