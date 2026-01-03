@@ -1,6 +1,8 @@
 import torch
 import torch.nn.functional as F
 
+#hi
+
 def calc_mean_std(feat: torch.Tensor, 
                   eps: float = 1e-6) -> tuple[torch.Tensor, torch.Tensor]:
     """Compute channel-wise mean and standard deviation of feature maps.
