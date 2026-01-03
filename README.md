@@ -47,7 +47,7 @@ pip install -r requirements.txt
 
 ### Training
 
-Download the data to the ./data/ folder. The content images come from the [COCO](https://cocodataset.org/#download) dataset and the style images come [Wikiart](https://www.kaggle.com/c/painter-by-numbers) dataset. Run the script train.py. 
+Download the data to the ./data/ folder. The content images come from the [COCO](https://cocodataset.org/#download) dataset and the style images come from the [Wikiart](https://www.wikiart.org/) dataset. Run the script train.py. 
 
 ```bash
 python -m scripts.train \
@@ -92,3 +92,4 @@ python -m scripts.test \
 - AdaIN implementation based on [Xun Huang and Serge Belongie's paper](https://arxiv.org/abs/1703.06868)
 - Segmentation powered by [Meta's SAM](https://github.com/facebookresearch/segment-anything)
 - VGG-19 encoder from PyTorch's pretrained models
+- Training data comes from the [COCO](https://cocodataset.org/#download) dataset and [Wikiart](https://www.wikiart.org/) dataset
