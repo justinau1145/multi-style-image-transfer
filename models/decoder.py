@@ -16,7 +16,7 @@ class Decoder(nn.Module):
     def __init__(self) -> None:
         super(Decoder, self).__init__()
         
-        # Mirror of VGG encoder (inverse architecture)
+        # Mirror of VGG encoder
         self.decoder = nn.Sequential(
             # Inverse of relu4_1 to relu3_1
             nn.ReflectionPad2d(1),
