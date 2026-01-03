@@ -78,7 +78,7 @@ python -m scripts.test \
     --decoder_path ./decoder_weights.pth \
     --sam_checkpoint ./sam_vit_h_4b8939.pth \
     --alphas 1.0 0.5 \
-    --output_name ./output/result.jpg \
+    --output_name ./results/result.jpg \
     --device cuda
 ```
 
