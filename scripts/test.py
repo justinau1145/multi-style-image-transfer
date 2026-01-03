@@ -3,7 +3,7 @@ import numpy as np
 import argparse
 import os
 
-# merge test
+# merge test further
 
 # Project imports
 from models.encoder import VGGEncoder
